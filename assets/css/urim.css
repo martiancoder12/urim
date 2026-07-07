@@ -1,0 +1,70 @@
+/* ============================================================
+   URIM v4 — ANIMATION LAYER (CSS)
+   Skills applied: css-animation (ambient keyframe layer),
+   gsap-performance (will-change, transform/opacity discipline)
+   ============================================================ */
+
+/* word/char split wrappers (gsap-core stagger targets) */
+.u-wln{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:0.09em;margin-bottom:-0.09em}
+.u-wch{display:inline-block;will-change:transform}
+.u-chln{display:inline-block;overflow:hidden;vertical-align:bottom}
+.u-chch{display:inline-block;will-change:transform,filter}
+
+/* boot overlay */
+#u-boot{position:fixed;inset:0;z-index:200;background:#000;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#u-boot .u-boot-inner{width:min(680px,86vw);font-family:'Share Tech Mono',ui-monospace,monospace;font-size:12.5px;letter-spacing:0.12em;line-height:2.1;color:#8FD8A0}
+#u-boot .u-boot-line{min-height:1.6em;white-space:pre-wrap}
+#u-boot .u-boot-line b{color:#00FF41;font-weight:400;text-shadow:0 0 10px rgba(0,255,65,0.6)}
+#u-bar{height:1px;background:rgba(0,255,65,0.18);margin-top:18px;position:relative;overflow:hidden}
+#u-bar i{position:absolute;inset:0;background:#00FF41;transform-origin:left;transform:scaleX(0);box-shadow:0 0 12px rgba(0,255,65,0.8)}
+#u-boot .u-skip{margin-top:26px;font-size:9.5px;letter-spacing:0.3em;color:#447950}
+#u-flash{position:fixed;inset:0;z-index:210;background:radial-gradient(ellipse at 50% 50%,rgba(180,255,200,0.9),rgba(0,255,65,0.25) 55%,transparent 80%);opacity:0;pointer-events:none}
+
+/* scroll progress hairline */
+#u-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:90;background:#00FF41;transform-origin:left;transform:scaleX(0);box-shadow:0 0 10px rgba(0,255,65,0.8);pointer-events:none}
+
+/* hero glow pulse — ambient css-animation layer, GPU-cheap */
+@keyframes uGlow{0%,100%{text-shadow:0 0 60px rgba(0,255,65,0.25)}50%{text-shadow:0 0 90px rgba(0,255,65,0.5),0 0 24px rgba(0,255,65,0.35)}}
+.u-glow{animation:uGlow 5.2s ease-in-out infinite}
+
+/* CRT flicker veil (opacity-only) */
+#u-crt{position:fixed;inset:0;z-index:55;pointer-events:none;opacity:0;background:linear-gradient(180deg,rgba(0,255,65,0.06),rgba(255,255,255,0.05) 40%,rgba(0,255,65,0.06))}
+
+/* ledger row states */
+[data-lrow]{will-change:opacity}
+.u-lrow-flash{background:rgba(0,255,65,0.07) !important}
+
+/* magnetic targets */
+.u-mag{will-change:transform;display:inline-block}
+
+/* interaction affordances converted from Design Canvas attrs are appended below */
+@media (prefers-reduced-motion: reduce){
+  .u-glow{animation:none}
+  html{scroll-behavior:auto}
+}
+
+.u-hv1:hover{color:var(--ac)}
+.u-hv2:hover{color:var(--ac)}
+.u-hv3:hover{color:var(--ac)}
+.u-hv4:hover{color:var(--ac)}
+.u-hv5:hover{filter:brightness(1.12)}
+.u-hv6:hover{filter:brightness(1.12)}
+.u-hv7:hover{color:var(--ac);border-color:var(--ac)}
+.u-hv8:hover{border-color:var(--ac);color:var(--ac)}
+.u-hv9:hover{filter:brightness(1.12)}
+.u-fc10:focus{border-color:var(--ac)}
+.u-fc11:focus{border-color:var(--ac)}
+.u-fc12:focus{border-color:var(--ac)}
+.u-fc13:focus{border-color:var(--ac)}
+
+/* ============ base layer ============ */
+body{margin:0;background:#000;color:#DFF5E4;font-family:'Bodoni Moda',Didot,'Times New Roman',serif;color-scheme:dark;-webkit-font-smoothing:antialiased;--ac:#00FF41;--fd:'Bodoni Moda',Didot,serif;--fm:'Share Tech Mono',ui-monospace,monospace;--hair:rgba(0,255,65,0.2);--t2:#8FD8A0;--t3:#447950;--panel:#020A04;--glow:0 0 14px rgba(0,255,65,0.5);--chrome:linear-gradient(180deg,#FFFFFF 0%,#D7D7D7 38%,#8A8A8A 50%,#EFEFEF 62%,#9C9C9C 100%)}
+a{color:var(--ac);text-decoration:none}
+a:hover{color:#AFFFB0;text-decoration:none}
+::selection{background:var(--ac);color:#000}
+input,select,textarea,button{font-family:'Share Tech Mono',ui-monospace,monospace}
+@keyframes ublink{0%,100%{opacity:1}50%{opacity:0.2}}
+@keyframes ucursor{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes umarq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media (max-width:1120px){#nav-links{display:none !important}}
+@media (max-width:760px){#nav-lang{display:none !important}}

@@ -1,0 +1,10 @@
+{
+  "name": "urim-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "URIM — The Legal Prediction Engine. Landing page and access-request API (Laboratoires Structure).",
+  "type": "module",
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0"
+  }
+}

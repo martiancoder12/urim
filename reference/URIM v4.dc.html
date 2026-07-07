@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#000;color:#DFF5E4;font-family:'Bodoni Moda',Didot,'Times New Roman',serif;color-scheme:dark;-webkit-font-smoothing:antialiased;--ac:#00FF41;--fd:'Bodoni Moda',Didot,serif;--fm:'Share Tech Mono',ui-monospace,monospace;--hair:rgba(0,255,65,0.2);--t2:#8FD8A0;--t3:#447950;--panel:#020A04;--glow:0 0 14px rgba(0,255,65,0.5);--chrome:linear-gradient(180deg,#FFFFFF 0%,#D7D7D7 38%,#8A8A8A 50%,#EFEFEF 62%,#9C9C9C 100%)}
+a{color:var(--ac);text-decoration:none}
+a:hover{color:#AFFFB0;text-decoration:none}
+::selection{background:var(--ac);color:#000}
+input,select,textarea,button{font-family:'Share Tech Mono',ui-monospace,monospace}
+@keyframes ublink{0%,100%{opacity:1}50%{opacity:0.2}}
+@keyframes ucursor{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes umarq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media (max-width:1120px){#nav-links{display:none !important}}
+@media (max-width:760px){#nav-lang{display:none !important}}
+</style>
+</helmet>
+
+<div data-screen-label="URIM v4 — couture edition" style="background:#000;min-height:100vh;position:relative">
+
+  <!-- CRT scanlines, whisper-level -->
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:50;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 2px,rgba(0,0,0,0.12) 3px,rgba(0,0,0,0) 4px)"></div>
+
+  <!-- ============ NAV / MASTHEAD BAR ============ -->
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:28px;padding:0 36px;height:60px;background:rgba(0,0,0,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)">
+    <a href="#top" style="display:flex;align-items:baseline;gap:12px;text-decoration:none">
+      <span style="font-family:var(--fd);font-size:22px;font-weight:500;letter-spacing:0.06em;color:#F4FFF6">URIM<span style="font-size:9px;vertical-align:super">™</span></span>
+      <span style="font-family:var(--fm);font-size:9.5px;letter-spacing:0.26em;color:var(--t3)">N°01 — THE PRECEDENT ISSUE</span>
+    </a>
+    <div style="flex:1"></div>
+    <div id="nav-links" style="display:flex;align-items:center;gap:24px;font-family:var(--fm);font-size:11px;letter-spacing:0.18em;white-space:nowrap">
+      <a href="#method" style="color:var(--t2);white-space:nowrap" style-hover="color:var(--ac)">METHOD</a>
+      <a href="#ledger" style="color:var(--t2);white-space:nowrap" style-hover="color:var(--ac)">LEDGER</a>
+      <a href="#practice" style="color:var(--t2);white-space:nowrap" style-hover="color:var(--ac)">IN PRACTICE</a>
+      <a href="#lab" style="color:var(--t2);white-space:nowrap" style-hover="color:var(--ac)">THE LAB</a>
+    </div>
+    <div id="nav-lang" style="display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:10.5px;letter-spacing:0.12em;white-space:nowrap">
+      <span style="color:var(--ac)">EN</span>
+      <span style="color:var(--t3)">·</span>
+      <span title="Version française en préparation" style="color:var(--t3);cursor:not-allowed">FR</span>
+    </div>
+    <a href="#access" style="font-family:var(--fm);font-size:11px;letter-spacing:0.16em;color:#002B0A;background:linear-gradient(180deg,#9DFFB8 0%,#2BFF62 45%,#00C832 52%,#00E53B 100%);border-radius:999px;padding:9px 20px;text-decoration:none;white-space:nowrap;flex:none;box-shadow:0 0 14px rgba(0,255,65,0.4), inset 0 1px 0 rgba(255,255,255,0.7)" style-hover="filter:brightness(1.12)">REQUEST EARLY ACCESS</a>
+  </nav>
+
+  <!-- ============ COVER ============ -->
+  <header id="top" data-screen-label="Cover" style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;text-align:center">
+    <canvas id="uh-rain" style="position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0.55"></canvas>
+    <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0.85) 10%,rgba(0,0,0,0.35) 55%,rgba(0,0,0,0) 80%)"></div>
+    <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:130px 36px 80px;width:100%;display:flex;flex-direction:column;align-items:center;gap:26px">
+      <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.44em;color:var(--t2)">LABORATOIRES STRUCTURE PRÉSENTE</span>
+      <h1 style="margin:0;font-family:var(--fd);font-weight:500;font-size:clamp(88px,19vw,260px);line-height:0.92;letter-spacing:0.02em;color:#F4FFF6;text-shadow:0 0 60px rgba(0,255,65,0.25)">URIM</h1>
+      <div style="display:flex;align-items:center;gap:18px;font-family:var(--fm);font-size:10.5px;letter-spacing:0.3em;color:var(--t3)">
+        <span style="display:inline-block;width:44px;height:1px;background:var(--hair)"></span>
+        <span>THE LEGAL PREDICTION ENGINE</span>
+        <span style="display:inline-block;width:44px;height:1px;background:var(--hair)"></span>
+      </div>
+      <sc-if value="{{ heroA }}" hint-placeholder-val="{{ false }}">
+        <p id="hero-title" data-decode="The outcome, before the courtroom." style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(26px,4.4vw,52px);line-height:1.3;color:var(--ac);text-shadow:0 0 24px rgba(0,255,65,0.5)">The outcome, before the courtroom.</p>
+      </sc-if>
+      <sc-if value="{{ heroB }}" hint-placeholder-val="{{ true }}">
+        <p id="hero-title" data-decode="Litigation, computed." style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(30px,5vw,60px);line-height:1.3;color:var(--ac);text-shadow:0 0 24px rgba(0,255,65,0.5)">Litigation, computed.</p>
+      </sc-if>
+      <sc-if value="{{ heroC }}" hint-placeholder-val="{{ false }}">
+        <p id="hero-title" data-decode="Every precedent. One prediction." style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(26px,4.4vw,52px);line-height:1.3;color:var(--ac);text-shadow:0 0 24px rgba(0,255,65,0.5)">Every precedent. One prediction.</p>
+      </sc-if>
+      <p style="margin:0;max-width:560px;font-family:var(--fd);font-weight:400;font-size:17px;line-height:1.8;color:var(--t2)">The probable outcome. The path that reaches it. Tested against every decided case.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:8px">
+        <a href="#access" style="font-family:var(--fm);font-size:12.5px;letter-spacing:0.16em;color:#002B0A;background:linear-gradient(180deg,#9DFFB8 0%,#2BFF62 45%,#00C832 52%,#00E53B 100%);border-radius:999px;padding:16px 36px;text-decoration:none;white-space:nowrap;box-shadow:0 0 18px rgba(0,255,65,0.45), inset 0 1px 0 rgba(255,255,255,0.7)" style-hover="filter:brightness(1.12)">REQUEST EARLY ACCESS</a>
+        <a href="#method" style="font-family:var(--fm);font-size:12px;letter-spacing:0.16em;color:var(--t2);border:1px solid var(--hair);border-radius:999px;padding:15px 30px;text-decoration:none;white-space:nowrap" style-hover="color:var(--ac);border-color:var(--ac)">READ THE METHOD</a>
+      </div>
+      <p style="margin:0;font-family:var(--fm);font-size:10px;letter-spacing:0.16em;color:var(--t3)">AN ANALYTICAL INSTRUMENT FOR LEGAL PROFESSIONALS. NOT LEGAL ADVICE.</p>
+    </div>
+    <div style="position:absolute;bottom:26px;left:36px;right:36px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9.5px;letter-spacing:0.26em;color:var(--t3)">
+      <span>N°01 · JUILLET 2026</span>
+      <span>ÉDITION COUTURE — ILLUSTRATIVE</span>
+    </div>
+  </header>
+
+  <!-- ticker -->
+  <div aria-hidden="true" style="border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:10px 0;overflow:hidden;white-space:nowrap">
+    <div style="display:inline-flex;animation:umarq 40s linear infinite;font-family:var(--fm);font-size:11px;letter-spacing:0.14em;color:var(--t2)">
+      <span style="padding:0 30px">P-104201 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104202 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104204 MISS·SIGNAL ✕&nbsp;&nbsp;&nbsp;&nbsp;P-104205 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104206 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104208 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104210 MISS·SIGNAL ✕&nbsp;&nbsp;&nbsp;&nbsp;P-104211 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104213 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104215 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;— SEQUENTIAL PRECEDENT REPLICATION · ILLUSTRATIVE —&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span style="padding:0 30px">P-104201 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104202 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104204 MISS·SIGNAL ✕&nbsp;&nbsp;&nbsp;&nbsp;P-104205 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104206 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104208 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104210 MISS·SIGNAL ✕&nbsp;&nbsp;&nbsp;&nbsp;P-104211 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104213 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;P-104215 REPLICATED ✓&nbsp;&nbsp;&nbsp;&nbsp;— SEQUENTIAL PRECEDENT REPLICATION · ILLUSTRATIVE —&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ============ 01 THE QUESTION ============ -->
+  <section id="question" data-screen-label="The Question" style="padding:170px 36px 150px;scroll-margin-top:60px">
+    <div style="max-width:1000px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:44px;text-align:center">
+      <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">№ 01 — THE QUESTION</span>
+      <h2 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(42px,7vw,92px);line-height:1.15;color:#F4FFF6">« What are our<br>real chances? »</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:56px;max-width:900px;text-align:left">
+        <p style="margin:0;font-family:var(--fd);font-size:16px;line-height:1.9;color:var(--t2)"><span style="float:left;font-family:var(--fd);font-size:58px;line-height:0.8;padding:6px 10px 0 0;color:var(--ac)">E</span>very client asks it. Every lawyer answers from experience: instinct, a range, a feeling.</p>
+        <p style="margin:0;font-family:var(--fd);font-size:16px;line-height:1.9;color:var(--t2)">URIM™ answers with an instrument. A distribution. A confidence interval. The events the estimate depends on. Counsel decides.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- interstitial 1 -->
+  <section aria-label="Campaign — intuition vs instrumentation" style="padding:130px 36px;border-top:1px solid var(--hair);text-align:center">
+    <p style="margin:0;font-family:var(--fd);font-weight:400;font-size:clamp(36px,6.4vw,84px);line-height:1.2;color:#F4FFF6">Intuition <em style="font-style:italic;color:var(--ac);text-shadow:0 0 26px rgba(0,255,65,0.55)">vs.</em> instrumentation.</p>
+  </section>
+
+  <!-- ============ 02 THE INSTRUMENT ============ -->
+  <section id="instrument" data-screen-label="The Instrument" style="padding:150px 36px;border-top:1px solid var(--hair);scroll-margin-top:60px">
+    <div style="max-width:1060px;margin:0 auto;display:flex;flex-direction:column;gap:60px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">№ 02 — THE INSTRUMENT</span>
+        <h2 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(36px,5.4vw,72px);line-height:1.2;color:#F4FFF6">One instrument.<br>Three signals.</h2>
+        <p style="margin:0;max-width:520px;font-family:var(--fd);font-size:16px;line-height:1.85;color:var(--t2)">Three signals, read together on every prediction.</p>
+      </div>
+      <div>
+        <div style="border-top:1px solid var(--hair)">
+          <div style="display:grid;grid-template-columns:120px 260px 1fr;gap:24px;padding:34px 8px;border-bottom:1px solid var(--hair);align-items:baseline">
+            <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.22em;color:var(--ac)">SIGNAL 01</span>
+            <span style="font-family:var(--fd);font-style:italic;font-size:24px;color:#F4FFF6">The Precedent Corpus</span>
+            <p style="margin:0;font-family:var(--fd);font-size:15px;line-height:1.85;color:var(--t2)">Every decided case, on the record.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:120px 260px 1fr;gap:24px;padding:34px 8px;border-bottom:1px solid var(--hair);align-items:baseline">
+            <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.22em;color:var(--ac)">SIGNAL 02</span>
+            <span style="font-family:var(--fd);font-style:italic;font-size:24px;color:#F4FFF6">The Living Landscape</span>
+            <p style="margin:0;font-family:var(--fd);font-size:15px;line-height:1.85;color:var(--t2)">New decisions. New legislation. Regulatory movement. As it happens.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:120px 260px 1fr;gap:24px;padding:34px 8px;border-bottom:1px solid var(--hair);align-items:baseline">
+            <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.22em;color:var(--ac)">SIGNAL 03</span>
+            <span style="font-family:var(--fd);font-style:italic;font-size:24px;color:#F4FFF6">The Opinion Layer</span>
+            <p style="margin:0;font-family:var(--fd);font-size:15px;line-height:1.85;color:var(--t2)">Prevailing legal and public opinion. The weather around a matter.</p>
+          </div>
+        </div>
+        <p style="margin:14px 8px 0;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">FIG. 01 — TECHNICAL SPECIFICATIONS, SIGNAL ARRAY.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- interstitial 2 -->
+  <section aria-label="Campaign — a chatbot vs a bench" style="padding:130px 36px;border-top:1px solid var(--hair);text-align:center">
+    <p style="margin:0;font-family:var(--fd);font-weight:400;font-size:clamp(36px,6.4vw,84px);line-height:1.2;color:#F4FFF6">A chatbot <em style="font-style:italic;color:var(--ac);text-shadow:0 0 26px rgba(0,255,65,0.55)">vs.</em> a bench.</p>
+  </section>
+
+  <!-- ============ 03 THE METHOD / THE PANEL ============ -->
+  <section id="method" data-screen-label="The Method — Panel" style="padding:150px 36px;border-top:1px solid var(--hair);scroll-margin-top:60px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:60px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">№ 03 — THE METHOD</span>
+        <h2 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(36px,5.4vw,72px);line-height:1.2;color:#F4FFF6">The engine<br>convenes.</h2>
+        <p style="margin:0;max-width:640px;font-family:var(--fd);font-size:16px;line-height:1.85;color:var(--t2)">One model per discipline. Employment law. Finance. Economics. Geopolitics. For each matter, URIM seats the <em style="color:#F4FFF6">Optimal Panel</em> — the bench best suited to judge it. The panel argues. Cross-examines. Converges.</p>
+      </div>
+
+      <!-- Panel visualization -->
+      <div>
+        <div id="panel-viz" style="display:flex;flex-wrap:wrap;gap:1px;background:var(--hair);border:1px solid var(--hair)">
+          <div style="flex:1 1 230px;min-width:230px;background:var(--panel);padding:30px 26px;display:flex;flex-direction:column;gap:16px">
+            <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.22em;color:var(--t3)">MATTER — ILLUSTRATIVE</span>
+            <p style="margin:0;font-family:var(--fd);font-style:italic;font-size:22px;line-height:1.35;color:#F4FFF6">Cross-border agricultural contract claim</p>
+            <div style="display:flex;flex-direction:column;gap:8px;font-family:var(--fm);font-size:11.5px;line-height:1.5;color:var(--t2)">
+              <span>JURISDICTION&nbsp;&nbsp;ON / INTL</span>
+              <span>CLAIM VALUE&nbsp;&nbsp;&nbsp;$12.4M</span>
+              <span>POSTURE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRE-DISCOVERY</span>
+            </div>
+            <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--hair);font-family:var(--fm);font-size:11px;letter-spacing:0.14em;line-height:1.9;color:var(--t3)">
+              <span style="color:var(--t2)">PANEL CONVENED</span><br>
+              <span id="pv-roster" style="color:var(--ac)">—</span>
+            </div>
+          </div>
+          <div style="flex:2 1 460px;min-width:320px;background:#010502;padding:16px;display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 720 560" style="width:100%;max-width:640px;height:auto;display:block" role="img" aria-label="Constellation of expert models; four ignite and link into a panel">
+              <g stroke="var(--hair)" stroke-width="1">
+                <line x1="120" y1="84" x2="302" y2="58"></line>
+                <line x1="302" y1="58" x2="472" y2="44"></line>
+                <line x1="472" y1="44" x2="596" y2="104"></line>
+                <line x1="596" y1="104" x2="664" y2="208"></line>
+                <line x1="664" y1="208" x2="636" y2="338"></line>
+                <line x1="636" y1="338" x2="652" y2="462"></line>
+                <line x1="652" y1="462" x2="488" y2="516"></line>
+                <line x1="488" y1="516" x2="280" y2="522"></line>
+                <line x1="280" y1="522" x2="108" y2="452"></line>
+                <line x1="108" y1="452" x2="56" y2="300"></line>
+                <line x1="56" y1="300" x2="140" y2="178"></line>
+                <line x1="140" y1="178" x2="120" y2="84"></line>
+              </g>
+              <g stroke="var(--ac)" stroke-width="1.3" opacity="0.85" style="filter:drop-shadow(0 0 4px rgba(0,255,65,0.6))">
+                <line data-plink x1="302" y1="58" x2="360" y2="290" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+                <line data-plink x1="596" y1="104" x2="360" y2="290" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+                <line data-plink x1="636" y1="338" x2="360" y2="290" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+                <line data-plink x1="280" y1="522" x2="360" y2="290" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+              </g>
+              <g data-pnode transform="translate(120,84)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="-12" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">EMPLOYMENT LAW</text></g>
+              <g data-pnode data-pactive transform="translate(302,58)" style="color:#447950;opacity:0.55"><circle data-ring r="9" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0"></circle><circle r="4" fill="currentColor"></circle><text y="-14" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">CONTRACT LAW</text></g>
+              <g data-pnode transform="translate(472,44)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="-12" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">INSOLVENCY</text></g>
+              <g data-pnode data-pactive transform="translate(596,104)" style="color:#447950;opacity:0.55"><circle data-ring r="9" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0"></circle><circle r="4" fill="currentColor"></circle><text y="-14" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">FINANCE</text></g>
+              <g data-pnode transform="translate(664,208)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="-12" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">TAX</text></g>
+              <g data-pnode data-pactive transform="translate(636,338)" style="color:#447950;opacity:0.55"><circle data-ring r="9" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0"></circle><circle r="4" fill="currentColor"></circle><text y="-14" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">GEOPOLITICS</text></g>
+              <g data-pnode transform="translate(652,462)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="-12" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">IP</text></g>
+              <g data-pnode transform="translate(488,516)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="22" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">REGULATORY</text></g>
+              <g data-pnode data-pactive transform="translate(280,522)" style="color:#447950;opacity:0.55"><circle data-ring r="9" fill="none" stroke="currentColor" stroke-width="1" style="opacity:0"></circle><circle r="4" fill="currentColor"></circle><text y="24" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">SUSTAINABLE AGRICULTURE</text></g>
+              <g data-pnode transform="translate(108,452)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="22" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">ECONOMICS</text></g>
+              <g data-pnode transform="translate(56,300)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="-12" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">CLASS ACTIONS</text></g>
+              <g data-pnode transform="translate(140,178)" style="color:#447950;opacity:0.55"><circle r="4" fill="currentColor"></circle><text y="-12" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.12em">PRIVACY</text></g>
+              <g id="pv-hub" transform="translate(360,290)" style="color:#447950;opacity:0.4">
+                <circle r="13" fill="none" stroke="currentColor" stroke-width="1"></circle>
+                <circle r="5" fill="currentColor"></circle>
+                <text y="34" text-anchor="middle" fill="currentColor" style="font-family:var(--fm);font-size:10px;letter-spacing:0.2em">THE PANEL</text>
+              </g>
+            </svg>
+          </div>
+          <div style="flex:1 1 230px;min-width:230px;background:var(--panel);padding:30px 26px;display:flex;flex-direction:column;gap:16px">
+            <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.22em;color:var(--t3)">PANEL PREDICTION</span>
+            <span id="pd-num" style="font-family:var(--fm);font-size:52px;line-height:1;color:var(--ac);text-shadow:0 0 18px rgba(0,255,65,0.55)">0.000</span>
+            <span style="font-family:var(--fm);font-size:11.5px;letter-spacing:0.1em;color:var(--t2)">P( CLAIM SUCCEEDS )</span>
+            <div id="pd-ci" style="opacity:0;display:flex;flex-direction:column;gap:8px;font-family:var(--fm);font-size:11.5px;line-height:1.5;color:var(--t2)">
+              <span>90% CI&nbsp;&nbsp;&nbsp;&nbsp;0.61 – 0.75</span>
+              <span>DELIBERATION&nbsp;&nbsp;4 EXPERTS · 3 ROUNDS</span>
+              <span>DISSENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 OF 4, RESOLVED</span>
+            </div>
+            <span style="margin-top:auto;align-self:flex-start;font-family:var(--fm);font-size:9.5px;letter-spacing:0.2em;color:#000;background:var(--t2);padding:3px 8px">ILLUSTRATIVE</span>
+          </div>
+        </div>
+        <p style="margin:14px 2px 0;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">FIG. 02 — THE PANEL CONVENES. FOUR EXPERTS, ONE MATTER. ILLUSTRATIVE.</p>
+      </div>
+
+      <div style="display:flex;align-items:baseline;justify-content:center;gap:22px;flex-wrap:wrap;border-top:1px solid var(--hair);padding-top:26px;text-align:center">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.22em;color:var(--t3);flex:none">MODEL PROVENANCE</span>
+        <sc-if value="{{ named }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:0;max-width:640px;font-family:var(--fd);font-size:15px;line-height:1.85;color:var(--t2)">Proprietary models, with trained models from <em style="color:#F4FFF6">Thinking Machines Lab</em>.</p>
+        </sc-if>
+        <sc-if value="{{ unnamed }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;max-width:640px;font-family:var(--fd);font-size:15px;line-height:1.85;color:var(--t2)">Proprietary models, with specialized externally-trained models.</p>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- interstitial 3 -->
+  <section aria-label="Campaign — a hunch vs history" style="padding:130px 36px;border-top:1px solid var(--hair);text-align:center">
+    <p style="margin:0;font-family:var(--fd);font-weight:400;font-size:clamp(36px,6.4vw,84px);line-height:1.2;color:#F4FFF6">A hunch <em style="font-style:italic;color:var(--ac);text-shadow:0 0 26px rgba(0,255,65,0.55)">vs.</em> history.</p>
+  </section>
+
+  <!-- ============ 04 THE LEDGER ============ -->
+  <section id="ledger" data-screen-label="The Ledger" style="padding:150px 36px;border-top:1px solid var(--hair);background:var(--panel);scroll-margin-top:60px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:52px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">№ 04 — PROOF-OF-WORK</span>
+        <h2 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(36px,5.4vw,72px);line-height:1.2;color:#F4FFF6">Tested against history.</h2>
+        <p style="margin:0;max-width:660px;font-family:var(--fd);font-size:16px;line-height:1.85;color:var(--t2)"><em style="color:#F4FFF6">Sequential precedent replication.</em> URIM re-tries decided cases, blind to the result. The court keeps score.</p>
+      </div>
+
+      <div>
+        <div id="ledger-box" style="display:flex;flex-wrap:wrap;gap:1px;background:var(--hair);border:1px solid var(--hair)">
+          <div style="flex:2 1 520px;min-width:320px;background:#000;padding:8px 0">
+            <div style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:12px 24px;font-family:var(--fm);font-size:10.5px;letter-spacing:0.16em;color:var(--t3);border-bottom:1px solid var(--hair)">
+              <span>INDEX</span><span>MATTER CLASS</span><span>JURIS</span><span>YEAR</span><span style="text-align:right">STATUS</span>
+            </div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118402</span><span>EMPLOYMENT</span><span>ON</span><span>2014</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118403</span><span>CONTRACT</span><span>QC</span><span>2011</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118404</span><span>SECURITIES</span><span>ON</span><span>2018</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="M" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118405</span><span>CONSTRUCTION</span><span>AB</span><span>2009</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118406</span><span>EMPLOYMENT</span><span>BC</span><span>2016</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118407</span><span>IP</span><span>FED</span><span>2020</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118408</span><span>INSURANCE</span><span>QC</span><span>2013</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="M" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118409</span><span>TAX</span><span>FED</span><span>2017</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118410</span><span>CLASS ACTION</span><span>ON</span><span>2019</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118411</span><span>ENVIRONMENTAL</span><span>QC</span><span>2021</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2);border-bottom:1px solid rgba(0,255,65,0.07)"><span>P-118412</span><span>EMPLOYMENT</span><span>ON</span><span>2022</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+            <div data-lrow data-final="R" style="display:grid;grid-template-columns:110px 1fr 82px 60px 170px;gap:8px;padding:9px 24px;font-family:var(--fm);font-size:12px;color:var(--t2)"><span>P-118413</span><span>COMMERCIAL LEASE</span><span>ON</span><span>2015</span><span data-lst style="text-align:right;color:var(--t3)">QUEUED</span></div>
+          </div>
+          <div style="flex:1 1 280px;min-width:260px;background:#000;padding:34px 28px;display:flex;flex-direction:column;gap:28px">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.22em;color:var(--t3)">PRECEDENTS EVALUATED</span>
+              <span id="lg-count" style="font-family:var(--fd);font-size:48px;line-height:1;color:#F4FFF6">0</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.22em;color:var(--t3)">REPLICATION RATE</span>
+              <span style="display:flex;align-items:baseline;gap:4px"><span id="lg-rate" style="font-family:var(--fd);font-size:48px;line-height:1;color:var(--ac);text-shadow:0 0 18px rgba(0,255,65,0.55)">0.0</span><span style="font-family:var(--fd);font-size:22px;color:var(--ac)">%</span></span>
+              <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.1em;color:var(--t3)">TARGET: CONVERGENCE → 100%</span>
+            </div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:12px">
+              <span style="align-self:flex-start;font-family:var(--fm);font-size:9.5px;letter-spacing:0.2em;color:#000;background:var(--t2);padding:3px 8px">ILLUSTRATIVE</span>
+              <p style="margin:0;font-family:var(--fd);font-size:13px;line-height:1.75;color:var(--t3)">A methodology demonstration. Published figures will be real, dated, versioned, and linked to method.</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin:14px 2px 0;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">FIG. 03 — THE REPLICATION LEDGER, LIVE FEED. ILLUSTRATIVE.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 IN PRACTICE / CRITICAL PATH ============ -->
+  <section id="practice" data-screen-label="In Practice — Critical Path" style="padding:150px 36px;border-top:1px solid var(--hair);scroll-margin-top:60px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:60px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">№ 05 — IN PRACTICE</span>
+        <h2 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(36px,5.4vw,72px);line-height:1.2;color:#F4FFF6">The path<br>is the product.</h2>
+        <p style="margin:0;max-width:640px;font-family:var(--fd);font-size:16px;line-height:1.85;color:var(--t2)">Each prediction is a <em style="color:#F4FFF6">Critical Path</em>: the events the outcome depends on, in order, with the points where it breaks.</p>
+      </div>
+
+      <div>
+        <div id="cpath" style="border:1px solid var(--hair);background:var(--panel);padding:34px 20px 10px;overflow-x:auto">
+          <svg viewBox="0 0 960 300" style="width:100%;min-width:760px;height:auto;display:block" role="img" aria-label="Critical path: five ordered events light up; failure branches dim out">
+            <g stroke="var(--hair)" stroke-width="1">
+              <line x1="82" y1="96" x2="250" y2="96"></line>
+              <line x1="274" y1="96" x2="442" y2="96"></line>
+              <line x1="466" y1="96" x2="634" y2="96"></line>
+              <line x1="658" y1="96" x2="862" y2="96"></line>
+            </g>
+            <g stroke="var(--ac)" stroke-width="1.5" style="filter:drop-shadow(0 0 4px rgba(0,255,65,0.6))">
+              <line data-cseg x1="82" y1="96" x2="250" y2="96" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+              <line data-cseg x1="274" y1="96" x2="442" y2="96" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+              <line data-cseg x1="466" y1="96" x2="634" y2="96" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+              <line data-cseg x1="658" y1="96" x2="862" y2="96" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"></line>
+            </g>
+            <g data-cfail style="opacity:0.38">
+              <line x1="262" y1="104" x2="338" y2="204" stroke="#447950" stroke-width="1" stroke-dasharray="5 5"></line>
+              <circle cx="338" cy="204" r="4" fill="none" stroke="#447950" stroke-width="1"></circle>
+              <text x="338" y="230" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.1em">CONSTRUED BROADLY</text>
+              <text x="338" y="248" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.1em">PATH FAILS ✕</text>
+            </g>
+            <g data-cfail style="opacity:0.38">
+              <line x1="646" y1="104" x2="722" y2="204" stroke="#447950" stroke-width="1" stroke-dasharray="5 5"></line>
+              <circle cx="722" cy="204" r="4" fill="none" stroke="#447950" stroke-width="1"></circle>
+              <text x="722" y="230" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.1em">PRECEDENT APPLIES</text>
+              <text x="722" y="248" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.1em">PATH FAILS ✕</text>
+            </g>
+            <g data-cnode transform="translate(70,96)" style="opacity:0.3">
+              <text y="-26" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10px;letter-spacing:0.18em">01</text>
+              <circle r="6" fill="none" stroke="var(--ac)" stroke-width="1.2"></circle><circle r="2.5" fill="var(--ac)"></circle>
+              <text y="42" text-anchor="middle" fill="#C7F0CF" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">JURISDICTION MOTION</text>
+              <text y="60" text-anchor="middle" fill="#8FD8A0" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">SURVIVES</text>
+            </g>
+            <g data-cnode transform="translate(262,96)" style="opacity:0.3">
+              <text y="-26" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10px;letter-spacing:0.18em">02</text>
+              <circle r="6" fill="none" stroke="var(--ac)" stroke-width="1.2"></circle><circle r="2.5" fill="var(--ac)"></circle>
+              <text y="42" text-anchor="middle" fill="#C7F0CF" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">FORCE-MAJEURE CLAUSE</text>
+              <text y="60" text-anchor="middle" fill="#8FD8A0" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">CONSTRUED NARROWLY</text>
+            </g>
+            <g data-cnode transform="translate(454,96)" style="opacity:0.3">
+              <text y="-26" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10px;letter-spacing:0.18em">03</text>
+              <circle r="6" fill="none" stroke="var(--ac)" stroke-width="1.2"></circle><circle r="2.5" fill="var(--ac)"></circle>
+              <text y="42" text-anchor="middle" fill="#C7F0CF" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">AGRONOMY EXPERT</text>
+              <text y="60" text-anchor="middle" fill="#8FD8A0" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">REPORT ADMITTED</text>
+            </g>
+            <g data-cnode transform="translate(646,96)" style="opacity:0.3">
+              <text y="-26" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10px;letter-spacing:0.18em">04</text>
+              <circle r="6" fill="none" stroke="var(--ac)" stroke-width="1.2"></circle><circle r="2.5" fill="var(--ac)"></circle>
+              <text y="42" text-anchor="middle" fill="#C7F0CF" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">KEY PRECEDENT</text>
+              <text y="60" text-anchor="middle" fill="#8FD8A0" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">DISTINGUISHED</text>
+            </g>
+            <g data-cnode transform="translate(874,96)" style="opacity:0.3">
+              <text y="-26" text-anchor="middle" fill="#447950" style="font-family:var(--fm);font-size:10px;letter-spacing:0.18em">05</text>
+              <circle r="12" fill="none" stroke="var(--ac)" stroke-width="1.2"></circle><circle r="4.5" fill="var(--ac)"></circle>
+              <text y="42" text-anchor="middle" fill="#C7F0CF" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">OUTCOME HOLDS</text>
+              <text y="60" text-anchor="middle" fill="#8FD8A0" style="font-family:var(--fm);font-size:11px;letter-spacing:0.08em">P = 0.68 · ILLUSTRATIVE</text>
+            </g>
+          </svg>
+        </div>
+        <p style="margin:14px 2px 0;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">FIG. 04 — THE CRITICAL PATH. THE EVENTS THAT SHOULD HAPPEN — WITHOUT WHICH THE PREDICTION FAILS. ILLUSTRATIVE.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--hair);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)">
+        <div style="background:#000;padding:38px 30px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.22em;color:var(--ac)">USE 01</span>
+          <h3 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:25px;color:#F4FFF6">Live-matter assessment</h3>
+          <p style="margin:0;font-family:var(--fd);font-size:14.5px;line-height:1.85;color:var(--t2)">The matter on your desk, measured before the next decision.</p>
+        </div>
+        <div style="background:#000;padding:38px 30px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.22em;color:var(--ac)">USE 02</span>
+          <h3 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:25px;color:#F4FFF6">Settle vs. proceed</h3>
+          <p style="margin:0;font-family:var(--fd);font-size:14.5px;line-height:1.85;color:var(--t2)">Both branches, priced. Each with its dependency chain.</p>
+        </div>
+        <div style="background:#000;padding:38px 30px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.22em;color:var(--ac)">USE 03</span>
+          <h3 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:25px;color:#F4FFF6">Strategy-path comparison</h3>
+          <p style="margin:0;font-family:var(--fd);font-size:14.5px;line-height:1.85;color:var(--t2)">Strategies, side by side. Where each holds. Where each breaks.</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:20px 0 0">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">HUMAN POSTURE</span>
+        <p style="margin:0;max-width:760px;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(22px,3vw,32px);line-height:1.6;color:#F4FFF6">An instrument for counsel. It informs judgment. It never exercises it.</p>
+        <p style="margin:0;max-width:620px;font-family:var(--fd);font-size:14.5px;line-height:1.85;color:var(--t2)">Probabilistic estimates for legal professionals. Not legal advice. Decisions rest with counsel and client.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 THE LAB ============ -->
+  <section id="lab" data-screen-label="The Lab" style="padding:150px 36px;border-top:1px solid var(--hair);scroll-margin-top:60px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:52px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">№ 06 — THE LAB</span>
+        <h2 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(36px,5.4vw,72px);line-height:1.2;color:#F4FFF6">A Laboratoires<br>Structure lab.</h2>
+        <p style="margin:0;max-width:600px;font-family:var(--fd);font-size:16px;line-height:1.85;color:var(--t2)">A research house. A family of labs, each imposing order on a chaotic system. URIM is the newest.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--hair);border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)">
+        <div style="background:#000;padding:34px 26px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:var(--fd);font-style:italic;font-size:21px;color:#F4FFF6">Structure Legal</span>
+          <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.12em;line-height:1.7;color:var(--t3)">LICENSED PARALEGAL PRACTICE<br>“ORDER, OUT OF CHAOS”</span>
+        </div>
+        <div style="background:#000;padding:34px 26px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:var(--fd);font-style:italic;font-size:21px;color:#F4FFF6">Atelier Structure</span>
+          <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.12em;line-height:1.7;color:var(--t3)">PRODUCT STUDIO<br>“BLUEPRINT → BUILT”</span>
+        </div>
+        <div style="background:#000;padding:34px 26px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:var(--fd);font-style:italic;font-size:21px;color:#F4FFF6">DAIMON</span>
+          <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.12em;line-height:1.7;color:var(--t3)">AI AGENT PERSONALITY R&amp;D</span>
+        </div>
+        <div style="background:#000;padding:34px 26px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:var(--fd);font-style:italic;font-size:21px;color:#F4FFF6">ULTUR</span>
+          <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.12em;line-height:1.7;color:var(--t3)">ULTRA-SECURE DATA CUSTODY</span>
+        </div>
+        <div style="background:var(--panel);padding:34px 26px;display:flex;flex-direction:column;gap:10px;box-shadow:inset 0 0 0 1px var(--ac)">
+          <span style="display:flex;align-items:baseline;gap:10px"><span style="font-family:var(--fd);font-style:italic;font-size:21px;color:var(--ac)">URIM</span><span style="font-family:var(--fm);font-size:9px;letter-spacing:0.18em;color:var(--ac)">THIS LAB</span></span>
+          <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.12em;line-height:1.7;color:var(--t3)">LEGAL PREDICTION ENGINE<br>AN INSTRUMENT OF JUDGMENT — CONSULTED, NOT DECIDING</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 ACCESS ============ -->
+  <section id="access" data-screen-label="Access form" style="padding:150px 36px;border-top:1px solid var(--hair);background:var(--panel);scroll-margin-top:60px">
+    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:70px">
+      <div style="display:flex;flex-direction:column;gap:26px">
+        <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.4em;color:var(--ac)">№ 07 — ACCESS</span>
+        <h2 style="margin:0;font-family:var(--fd);font-style:italic;font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.15;color:#F4FFF6">Request<br>early access.</h2>
+        <p style="margin:0;max-width:460px;font-family:var(--fd);font-size:16px;line-height:1.85;color:var(--t2)">A limited cohort of legal professionals. Tell us about your practice. We’ll respond with a briefing.</p>
+        <div style="border-top:1px solid var(--hair);padding-top:26px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:var(--fm);font-size:10.5px;letter-spacing:0.22em;color:var(--t3)">OR WATCH THE SCORECARD</span>
+          <form id="nl-row" onSubmit="{{ subscribe }}" style="display:flex;gap:12px;flex-wrap:wrap">
+            <input type="email" required placeholder="work email" aria-label="Email for benchmark updates" style="flex:1 1 220px;background:transparent;border:1px solid var(--hair);border-radius:999px;color:#F4FFF6;font-size:12px;padding:12px 18px;outline:none" style-focus="border-color:var(--ac)">
+            <button type="submit" style="background:transparent;border:1px solid var(--hair);border-radius:999px;color:var(--t2);font-size:11px;letter-spacing:0.16em;padding:12px 22px;cursor:pointer" style-hover="border-color:var(--ac);color:var(--ac)">SUBSCRIBE</button>
+          </form>
+          <p id="nl-done" style="display:none;margin:0;font-family:var(--fm);font-size:11px;letter-spacing:0.1em;color:var(--ac)">SUBSCRIBED. BENCHMARK UPDATES, NO MORE THAN MONTHLY.</p>
+          <p style="margin:0;font-family:var(--fd);font-size:13px;line-height:1.7;color:var(--t3)">Benchmark updates, monthly at most. Unsubscribe anytime.</p>
+        </div>
+      </div>
+      <form id="access-form" onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:24px;border:1px solid var(--hair);background:#000;padding:40px 36px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px">
+          <label style="display:flex;flex-direction:column;gap:8px;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">NAME
+            <input type="text" required style="background:transparent;border:0;border-bottom:1px solid var(--hair);color:#F4FFF6;font-size:14px;padding:8px 0;outline:none" style-focus="border-color:var(--ac)">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:8px;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">FIRM / ORGANIZATION
+            <input type="text" required style="background:transparent;border:0;border-bottom:1px solid var(--hair);color:#F4FFF6;font-size:14px;padding:8px 0;outline:none" style-focus="border-color:var(--ac)">
+          </label>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px">
+          <label style="display:flex;flex-direction:column;gap:8px;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">ROLE
+            <select required style="background:#000;border:0;border-bottom:1px solid var(--hair);color:#F4FFF6;font-size:13px;padding:8px 0;outline:none">
+              <option value="">Select…</option>
+              <option>Partner</option>
+              <option>Senior associate</option>
+              <option>In-house counsel</option>
+              <option>Litigation manager</option>
+              <option>Litigation funder / insurer</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:8px;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">JURISDICTION
+            <select required style="background:#000;border:0;border-bottom:1px solid var(--hair);color:#F4FFF6;font-size:13px;padding:8px 0;outline:none">
+              <option value="">Select…</option>
+              <option>Ontario</option>
+              <option>Québec</option>
+              <option>Canada — other</option>
+              <option>United States</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </div>
+        <label style="display:flex;flex-direction:column;gap:8px;font-family:var(--fm);font-size:10px;letter-spacing:0.22em;color:var(--t3)">MATTER TYPES
+          <input type="text" placeholder="e.g. employment, commercial contract, securities" style="background:transparent;border:0;border-bottom:1px solid var(--hair);color:#F4FFF6;font-size:14px;padding:8px 0;outline:none" style-focus="border-color:var(--ac)">
+        </label>
+        <label style="display:flex;gap:12px;align-items:flex-start;font-family:var(--fd);font-size:13px;line-height:1.7;color:var(--t2);cursor:pointer">
+          <input type="checkbox" required style="margin-top:3px;accent-color:var(--ac);width:15px;height:15px;flex:none">
+          <span>I consent to Laboratoires Structure Inc. storing this information to contact me about URIM early access, under Québec Law 25 and PIPEDA. No other use; withdraw anytime.</span>
+        </label>
+        <button type="submit" style="align-self:flex-start;font-family:var(--fm);background:linear-gradient(180deg,#9DFFB8 0%,#2BFF62 45%,#00C832 52%,#00E53B 100%);border:0;border-radius:999px;color:#002B0A;font-size:12.5px;letter-spacing:0.16em;padding:15px 32px;cursor:pointer;box-shadow:0 0 18px rgba(0,255,65,0.45), inset 0 1px 0 rgba(255,255,255,0.7)" style-hover="filter:brightness(1.12)">REQUEST EARLY ACCESS</button>
+        <p style="margin:0;font-family:var(--fm);font-size:10px;letter-spacing:0.08em;color:var(--t3)">RESPONSES WITHIN FIVE BUSINESS DAYS.</p>
+      </form>
+      <div id="access-done" style="display:none;border:1px solid var(--ac);padding:48px 40px;flex-direction:column;gap:16px">
+        <span style="font-family:var(--fm);font-size:11px;letter-spacing:0.24em;color:var(--ac)">REQUEST LOGGED ✓</span>
+        <p style="margin:0;font-family:var(--fd);font-style:italic;font-size:30px;line-height:1.3;color:#F4FFF6">Received.</p>
+        <p style="margin:0;font-family:var(--fd);font-size:15px;line-height:1.8;color:var(--t2)">A briefing follows within five business days.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COLOPHON ============ -->
+  <footer data-screen-label="Colophon" style="border-top:1px solid var(--hair);padding:80px 36px 50px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:50px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:44px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:var(--fm);font-size:10px;letter-spacing:0.24em;color:var(--t3)">DISCLAIMER</span>
+          <p style="margin:0;font-family:var(--fd);font-size:13px;line-height:1.8;color:var(--t2)">URIM is an analytical instrument for legal professionals. Its outputs are probabilistic estimates, not legal advice, and no output guarantees or implies any case result. Decisions rest with counsel and client. URIM is a research program of Laboratoires Structure Inc. and is not a law firm.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:var(--fm);font-size:10px;letter-spacing:0.24em;color:var(--t3)">PRIVACY</span>
+          <p style="margin:0;font-family:var(--fd);font-size:13px;line-height:1.8;color:var(--t2)">Data submitted through this page is handled in accordance with Québec Law 25 and PIPEDA. No tracking without consent. All figures on this page are illustrative.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:var(--fm);font-size:10px;letter-spacing:0.24em;color:var(--t3)">COLOPHON</span>
+          <p style="margin:0;font-family:var(--fd);font-size:13px;line-height:1.8;color:var(--t2)">URIM: an instrument of judgment. Set in Bodoni Moda and Share Tech Mono. Édition couture.</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;border-top:1px solid var(--hair);padding-top:48px;text-align:center">
+        <span style="font-family:var(--fd);font-weight:500;font-size:44px;letter-spacing:0.04em;color:#F4FFF6">URIM<span style="font-size:15px;vertical-align:super">™</span></span>
+        <span style="font-family:var(--fd);font-style:italic;font-size:19px;color:var(--ac);text-shadow:0 0 14px rgba(0,255,65,0.45)">Litigation, computed.</span>
+        <span style="font-family:var(--fm);font-size:10px;letter-spacing:0.3em;color:var(--t3)">L’ISSUE, AVANT L’AUDIENCE.</span>
+        <span style="font-family:var(--fm);font-size:9.5px;letter-spacing:0.18em;color:var(--t3)">© 2026 LABORATOIRES STRUCTURE INC. — ORDER, OUT OF CHAOS.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accent&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#00FF41&quot;, &quot;options&quot;: [&quot;#00FF41&quot;, &quot;#00E5FF&quot;, &quot;#FFB000&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Identity — phosphor accent&quot;},
+  &quot;heroLine&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;computed&quot;, &quot;options&quot;: [&quot;outcome&quot;, &quot;computed&quot;, &quot;precedent&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Copy&quot;},
+  &quot;attributionNamed&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Claims — Thinking Machines attribution (D6)&quot;}
+}">
+class Component extends DCLogic {
+  renderVals() {
+    const line = this.props.heroLine ?? 'computed';
+    const named = this.props.attributionNamed ?? true;
+    return {
+      heroA: line === 'outcome',
+      heroB: line === 'computed',
+      heroC: line === 'precedent',
+      named: named,
+      unnamed: !named,
+      submit: (e) => this.onAccess(e),
+      subscribe: (e) => this.onSubscribe(e)
+    };
+  }
+
+  componentDidMount() {
+    this.reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.applyAccent();
+    this._timers = [];
+    setTimeout(() => this.initAll(), 60);
+  }
+
+  componentDidUpdate() { this.applyAccent(); }
+  componentWillUnmount() { (this._timers || []).forEach(t => clearTimeout(t)); this._stop = true; }
+
+  applyAccent() {
+    document.body.style.setProperty('--ac', this.props.accent ?? '#00FF41');
+  }
+
+  t(fn, ms) { const id = setTimeout(fn, ms); this._timers.push(id); return id; }
+  q(s) { return document.querySelector(s); }
+  qa(s) { return Array.from(document.querySelectorAll(s)); }
+
+  once(el, cb, th) {
+    if (!el) return;
+    const o = new IntersectionObserver((es) => {
+      es.forEach(en => { if (en.isIntersecting) { o.disconnect(); cb(); } });
+    }, { threshold: th == null ? 0.25 : th });
+    o.observe(el);
+  }
+
+  initAll() {
+    this.initRain();
+    this.initDecode();
+    this.initPanel();
+    this.initLedger();
+    this.initPath();
+  }
+
+  settle(el, target, dec, dur) {
+    if (!el) return;
+    if (this.reduced) { el.textContent = target.toFixed(dec); return; }
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min((now - start) / dur, 1);
+      const v = target * (1 - Math.exp(-5 * t) * Math.cos(11 * t));
+      el.textContent = Math.max(0, v).toFixed(dec);
+      if (t < 1 && !this._stop) requestAnimationFrame(step);
+      else el.textContent = target.toFixed(dec);
+    };
+    requestAnimationFrame(step);
+  }
+
+  count(el, target, dur) {
+    if (!el) return;
+    if (this.reduced) { el.textContent = target.toLocaleString('en-CA'); return; }
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min((now - start) / dur, 1);
+      const e = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(target * e).toLocaleString('en-CA');
+      if (t < 1 && !this._stop) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- digital rain (couture: sparser, slower) ---------- */
+  initRain() {
+    const cv = this.q('#uh-rain');
+    if (!cv) return;
+    const ctx = cv.getContext('2d');
+    const wrap = cv.parentElement;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const CHARS = '§¶©®ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789アイウエオカキクケコサシスセソ¤†‡Ω∑∆';
+    const FS = 19;
+    let cols = 0, drops = [];
+    const accent = () => getComputedStyle(document.body).getPropertyValue('--ac').trim() || '#00FF41';
+
+    const size = () => {
+      cv.width = Math.max(wrap.offsetWidth, 320) * dpr;
+      cv.height = Math.max(wrap.offsetHeight, 320) * dpr;
+      cols = Math.floor(cv.width / (FS * dpr));
+      drops = Array.from({ length: cols }, () => Math.floor(Math.random() * -80));
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, cv.width, cv.height);
+    };
+    size();
+    window.addEventListener('resize', size);
+
+    const drawStatic = () => {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.font = (FS * dpr) + 'px "Share Tech Mono", monospace';
+      const ac = accent();
+      for (let i = 0; i < cols; i++) {
+        const n = 2 + Math.floor(Math.random() * 6);
+        for (let k = 0; k < n; k++) {
+          const y = Math.random() * cv.height;
+          ctx.globalAlpha = 0.04 + Math.random() * 0.22;
+          ctx.fillStyle = ac;
+          ctx.fillText(CHARS[Math.floor(Math.random() * CHARS.length)], i * FS * dpr, y);
+        }
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    if (this.reduced) { drawStatic(); return; }
+
+    let last = 0;
+    const loop = (now) => {
+      if (this._stop) return;
+      requestAnimationFrame(loop);
+      if (now - last < 66) return;
+      last = now;
+      if (wrap.getBoundingClientRect().bottom < 0) return;
+      ctx.fillStyle = 'rgba(0,0,0,0.08)';
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      ctx.font = (FS * dpr) + 'px "Share Tech Mono", monospace';
+      const ac = accent();
+      for (let i = 0; i < cols; i++) {
+        if (i % 2 === 0) {
+          const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
+          const y = drops[i] * FS * dpr;
+          if (y > 0) {
+            ctx.fillStyle = '#D6FFE0';
+            ctx.globalAlpha = 0.7;
+            ctx.fillText(ch, i * FS * dpr, y);
+            ctx.fillStyle = ac;
+            ctx.globalAlpha = 0.4;
+            ctx.fillText(ch, i * FS * dpr, y - FS * dpr);
+            ctx.globalAlpha = 1;
+          }
+          if (y > cv.height && Math.random() > 0.98) drops[i] = Math.floor(Math.random() * -40);
+          drops[i]++;
+        }
+      }
+    };
+    requestAnimationFrame(loop);
+  }
+
+  /* ---------- cover line decode ---------- */
+  initDecode() {
+    const el = this.q('[data-decode]');
+    if (!el || this.reduced) return;
+    const target = el.getAttribute('data-decode');
+    const GL = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ§¶0123456789';
+    const start = performance.now();
+    const dur = 1600;
+    const step = (now) => {
+      if (this._stop) return;
+      const t = Math.min((now - start) / dur, 1);
+      const resolved = Math.floor(target.length * t);
+      let out = '';
+      for (let i = 0; i < target.length; i++) {
+        const c = target[i];
+        if (i < resolved || c === ' ' || c === ',' || c === '.') out += c;
+        else out += GL[Math.floor(Math.random() * GL.length)];
+      }
+      el.textContent = out;
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    };
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- panel ---------- */
+  initPanel() {
+    const box = this.q('#panel-viz');
+    if (!box) return;
+    const actives = this.qa('[data-pactive]');
+    const links = this.qa('[data-plink]');
+    const hub = this.q('#pv-hub');
+    const roster = this.q('#pv-roster');
+    const names = ['CONTRACT LAW', 'SUSTAINABLE AGRICULTURE', 'GEOPOLITICS', 'FINANCE'];
+
+    const finalize = () => {
+      actives.forEach(g => { g.style.color = 'var(--ac)'; g.style.opacity = '1'; const r = g.querySelector('[data-ring]'); if (r) r.style.opacity = '0.55'; });
+      links.forEach(l => { l.style.strokeDashoffset = '0'; });
+      if (hub) { hub.style.color = 'var(--ac)'; hub.style.opacity = '1'; }
+      if (roster) roster.textContent = names.join(' · ');
+      const num = this.q('#pd-num'); if (num) num.textContent = '0.684';
+      const ci = this.q('#pd-ci'); if (ci) ci.style.opacity = '1';
+    };
+
+    if (this.reduced) { this.once(box, finalize, 0.05); return; }
+
+    this.once(box, () => {
+      actives.forEach((g, i) => {
+        this.t(() => {
+          g.style.transition = 'color 0.5s ease, opacity 0.5s ease';
+          g.style.color = 'var(--ac)';
+          g.style.opacity = '1';
+          const r = g.querySelector('[data-ring]');
+          if (r) { r.style.transition = 'opacity 0.5s ease'; r.style.opacity = '0.55'; }
+        }, 200 + i * 280);
+      });
+      if (roster) {
+        names.forEach((n, i) => {
+          this.t(() => { roster.textContent = names.slice(0, i + 1).join(' · '); }, 260 + i * 280);
+        });
+      }
+      links.forEach((l, i) => {
+        this.t(() => {
+          l.style.transition = 'stroke-dashoffset 0.65s cubic-bezier(0.22,0.61,0.36,1)';
+          l.style.strokeDashoffset = '0';
+        }, 1450 + i * 190);
+      });
+      this.t(() => {
+        if (hub) { hub.style.transition = 'color 0.6s ease, opacity 0.6s ease'; hub.style.color = 'var(--ac)'; hub.style.opacity = '1'; }
+      }, 2250);
+      this.t(() => {
+        this.settle(this.q('#pd-num'), 0.684, 3, 1900);
+        const ci = this.q('#pd-ci');
+        if (ci) { ci.style.transition = 'opacity 0.8s ease'; ci.style.opacity = '1'; }
+      }, 2500);
+    }, 0.3);
+  }
+
+  /* ---------- ledger ---------- */
+  initLedger() {
+    const box = this.q('#ledger-box');
+    if (!box) return;
+    const rows = this.qa('[data-lrow]');
+
+    const setFinal = (row) => {
+      const st = row.querySelector('[data-lst]');
+      if (!st) return;
+      st.style.animation = 'none';
+      if (row.dataset.final === 'R') { st.textContent = 'REPLICATED ✓'; st.style.color = 'var(--ac)'; }
+      else { st.textContent = 'MISS · SIGNAL'; st.style.color = 'var(--t2)'; }
+    };
+
+    const finalize = () => {
+      rows.forEach(setFinal);
+      const c = this.q('#lg-count'); if (c) c.textContent = (12847).toLocaleString('en-CA');
+      const r = this.q('#lg-rate'); if (r) r.textContent = '87.3';
+    };
+
+    if (this.reduced) { this.once(box, finalize, 0.05); return; }
+
+    this.once(box, () => {
+      rows.forEach((row, i) => {
+        this.t(() => {
+          const st = row.querySelector('[data-lst]');
+          if (!st) return;
+          st.textContent = 'EVALUATING';
+          st.style.color = 'var(--ac)';
+          st.style.animation = 'ublink 0.4s linear infinite';
+          this.t(() => setFinal(row), 380);
+        }, i * 220);
+      });
+      this.t(() => {
+        this.count(this.q('#lg-count'), 12847, 1500);
+        this.settle(this.q('#lg-rate'), 87.3, 1, 1700);
+      }, rows.length * 220 + 200);
+    }, 0.25);
+  }
+
+  /* ---------- critical path ---------- */
+  initPath() {
+    const box = this.q('#cpath');
+    if (!box) return;
+    const nodes = this.qa('[data-cnode]');
+    const segs = this.qa('[data-cseg]');
+    const fails = this.qa('[data-cfail]');
+
+    const finalize = () => {
+      nodes.forEach(n => { n.style.opacity = '1'; });
+      segs.forEach(s => { s.style.strokeDashoffset = '0'; });
+      fails.forEach(f => { f.style.opacity = '0.1'; });
+    };
+
+    if (this.reduced) { this.once(box, finalize, 0.05); return; }
+
+    this.once(box, () => {
+      nodes.forEach((n, k) => {
+        this.t(() => {
+          n.style.transition = 'opacity 0.5s ease';
+          n.style.opacity = '1';
+        }, 200 + k * 430);
+      });
+      segs.forEach((s, k) => {
+        this.t(() => {
+          s.style.transition = 'stroke-dashoffset 0.5s cubic-bezier(0.22,0.61,0.36,1)';
+          s.style.strokeDashoffset = '0';
+        }, 380 + k * 430);
+      });
+      this.t(() => {
+        fails.forEach(f => {
+          f.style.transition = 'opacity 1s ease';
+          f.style.opacity = '0.1';
+        });
+      }, 200 + 5 * 430);
+    }, 0.35);
+  }
+
+  /* ---------- forms ---------- */
+  onAccess(e) {
+    e.preventDefault();
+    const f = this.q('#access-form');
+    const d = this.q('#access-done');
+    if (f) f.style.display = 'none';
+    if (d) d.style.display = 'flex';
+  }
+
+  onSubscribe(e) {
+    e.preventDefault();
+    const row = this.q('#nl-row');
+    const done = this.q('#nl-done');
+    if (row) row.style.display = 'none';
+    if (done) done.style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
