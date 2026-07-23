@@ -58,7 +58,7 @@
 .u-fc13:focus{border-color:var(--ac)}
 
 /* ============ base layer ============ */
-body{margin:0;background:#000;color:#DFF5E4;font-family:'Bodoni Moda',Didot,'Times New Roman',serif;color-scheme:dark;-webkit-font-smoothing:antialiased;--ac:#00FF41;--fd:'Bodoni Moda',Didot,serif;--fm:'Share Tech Mono',ui-monospace,monospace;--hair:rgba(0,255,65,0.2);--t2:#8FD8A0;--t3:#447950;--panel:#020A04;--glow:0 0 14px rgba(0,255,65,0.5);--chrome:linear-gradient(180deg,#FFFFFF 0%,#D7D7D7 38%,#8A8A8A 50%,#EFEFEF 62%,#9C9C9C 100%)}
+body{margin:0;background:#000;color:#DFF5E4;font-family:'Newsreader',Georgia,'Times New Roman',serif;color-scheme:dark;-webkit-font-smoothing:antialiased;font-optical-sizing:auto;overflow-x:hidden;--ac:#00FF41;--fd:'Newsreader',Georgia,serif;--fm:'Share Tech Mono',ui-monospace,monospace;--hair:rgba(0,255,65,0.2);--t2:#8FD8A0;--t3:#447950;--panel:#020A04;--glow:0 0 14px rgba(0,255,65,0.5);--chrome:linear-gradient(180deg,#FFFFFF 0%,#D7D7D7 38%,#8A8A8A 50%,#EFEFEF 62%,#9C9C9C 100%)}
 a{color:var(--ac);text-decoration:none}
 a:hover{color:#AFFFB0;text-decoration:none}
 ::selection{background:var(--ac);color:#000}
@@ -67,4 +67,48 @@ input,select,textarea,button{font-family:'Share Tech Mono',ui-monospace,monospac
 @keyframes ucursor{0%,100%{opacity:1}50%{opacity:0}}
 @keyframes umarq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @media (max-width:1120px){#nav-links{display:none !important}}
-@media (max-width:760px){#nav-lang{display:none !important}}
+
+/* ============ responsive layer (mobile optimization) ============
+   Inline styles dominate the markup, so these overrides use !important
+   to win the cascade. Tuned at 760px (phones/small tablets) and 480px. */
+@media (max-width:760px){
+  #nav-lang{display:none !important}
+
+  /* nav: tighten, drop the issue tagline, shrink the CTA so it never overflows */
+  nav{gap:12px !important;padding-left:16px !important;padding-right:16px !important}
+  nav a[href="#top"] > span:nth-child(2){display:none !important}
+  nav a[href="#access"]{padding:8px 14px !important;font-size:10px !important;letter-spacing:0.1em !important}
+
+  /* section rhythm: cut the oversized desktop padding to phone-friendly spacing */
+  #question,#instrument,#method,#ledger,#practice,#lab,#access{
+    padding-top:84px !important;padding-bottom:76px !important;
+    padding-left:20px !important;padding-right:20px !important}
+  section[aria-label^="Campaign"]{padding:64px 20px !important}
+  footer[data-screen-label="Colophon"]{padding-left:20px !important;padding-right:20px !important}
+
+  /* cover: pull in the huge top padding and edge captions */
+  [style*="130px 36px 80px"]{padding:104px 20px 56px !important}
+  [style*="bottom:26px"]{left:20px !important;right:20px !important;gap:10px !important;font-size:8px !important;letter-spacing:0.16em !important}
+
+  /* collapse inner section gaps that were sized for desktop */
+  #instrument > div,#method > div,#ledger > div,#practice > div,#lab > div{gap:40px !important}
+  #access > div{grid-template-columns:1fr !important;gap:40px !important}
+
+  /* the "three signals" spec grid: stack each row instead of overflowing */
+  [style*="120px 260px 1fr"]{grid-template-columns:1fr !important;gap:6px !important;padding-left:2px !important;padding-right:2px !important}
+
+  /* dense replication ledger: let the wide table scroll inside its own box */
+  #ledger-box > div:first-child{overflow-x:auto !important;-webkit-overflow-scrolling:touch}
+  [style*="110px 1fr 82px 60px 170px"]{min-width:480px}
+
+  /* forms: 16px inputs stop iOS from auto-zooming on focus */
+  #access input,#access select,#nl-row input{font-size:16px !important}
+}
+
+@media (max-width:480px){
+  /* extra breathing room + readability on the smallest screens */
+  #question,#instrument,#method,#ledger,#practice,#lab,#access{
+    padding-top:72px !important;padding-bottom:64px !important;
+    padding-left:16px !important;padding-right:16px !important}
+  section[aria-label^="Campaign"]{padding:52px 16px !important}
+}
