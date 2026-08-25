@@ -2,8 +2,12 @@
   "name": "urim-site",
   "version": "1.0.0",
   "private": true,
-  "description": "URIM — The Legal Prediction Engine. Landing page and access-request API (Laboratoires Structure).",
+  "description": "URIM — decision intelligence for complex disputes. Research site and briefing-request API (Laboratoires Structure).",
   "type": "module",
+  "scripts": {
+    "test": "node scripts/validate.mjs && npm run check:js",
+    "check:js": "node --check assets/js/urim.js && node --check api/access.js && node --check api/subscribe.js"
+  },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0"
   }

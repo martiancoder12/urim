@@ -1,55 +1,103 @@
-# URIM — Technical Implementation Plan
+# URIM — Product and implementation log
 
-**Project:** URIM landing page ("The Legal Prediction Engine" · Laboratoires Structure)
-**Date:** 2026-07-07
+## Current state — 2026-08-25
 
-## Current state
+The public site has been rebuilt around the product strategy in `README.md`.
+The active direction targets institutional, repeat dispute decision-makers and
+presents URIM as a reviewable decision instrument rather than a prediction demo.
+
+### Production source
 
 | File | Role |
 |---|---|
-| `reference/URIM v4.dc.html` | Static design comp (reference — do not edit) |
-| `reference/URIM_v4_animated.html` | Animated version, GSAP 3.12.5 (reference — bug-fixed) |
-| `index.html` + `assets/` + `api/` | **Production source of truth** (repo root = deployable Vercel project) |
+| `index.html` | Public product narrative, illustrative brief, qualification form |
+| `assets/css/urim.css` | Paper-and-ink design system and responsive layouts |
+| `assets/js/urim.js` | Scenario model, navigation, restrained reveals, form submission |
+| `api/access.js` | Briefing-request endpoint |
+| `api/subscribe.js` | Legacy subscriber endpoint, retained but not promoted |
+| `migrations/001_access_email.sql` | Adds contact email to access requests |
+| `scripts/validate.mjs` | Structural, asset, and public-claims checks |
+| `reference/` | Frozen v4 cybernetic / couture direction |
 
-## Phase 0 — Animation bug-fix pass ✅ (done, verified in browser)
+## Product decisions in this rebuild
 
-Root causes of the scroll-down conflicts, all fixed in `URIM_v4_animated.html`:
+1. **Primary customer:** portfolio decision-makers responsible for repeated,
+   high-value commercial disputes.
+2. **Primary conversion:** request a portfolio briefing, not generic early
+   access or a newsletter subscription.
+3. **Primary artifact:** a decision brief containing a range, assumptions,
+   critical path, sensitivities, sources, and versions.
+4. **Public proof rule:** no numerical performance or corpus claim until it is
+   real, dated, reproducible, scoped, and linked to method.
+5. **Visual model:** 60% investment memorandum, 25% judicial reasons, 15%
+   analytical instrument.
+6. **Motion model:** one short entry, subtle below-fold settling, and
+   user-triggered state change only.
+7. **Privacy posture:** the public form explicitly rejects confidential or
+   privileged matter information.
 
-1. **`pinSpacing` silently disabled** — the two pinned set-pieces (№03 Panel, №05 Critical Path) sit inside `display:flex` column parents; ScrollTrigger auto-disables pin spacing there, so the next section scrolled *over* the pinned visualization. Fixed with explicit `pinSpacing: true`. This was the visible overlap.
-2. **Trigger creation order** — page-wide reveal triggers were created before the pins, so everything below the pins measured wrong scroll positions (the Ledger played before it was visible). Fixed: set-pieces init first in document order + `ScrollTrigger.sort()`.
-3. **FIG captions inside pinned wrappers** were animated by the global reveal batch, whose triggers can't resolve against a pinned parent. Now owned by the pin timelines; `pinnedContainer` set on the heartbeat-pulse trigger.
-4. **CSS `scroll-behavior:smooth` vs pinned scrub** (documented GSAP conflict) — removed; anchor links now use ScrollToPlugin with a 60px nav offset (native jump remains the no-JS fallback via `scroll-margin-top`).
-5. **Boot overlay didn't lock scroll** — `once:true` reveals fired unseen and the hero intro fought the hero-exit scrub. Boot now locks `overflow`, pins scroll to top (`scrollRestoration: manual`), honors `#deep-links` after boot.
-6. **Pins on small viewports** — set-pieces are taller than mobile viewports; below 900px they now play as one-shot timelines instead of pinning.
-7. **Polish/perf** — interstitial parallax reaches full opacity while readable (not at exit); `will-change`/blur layers released after one-shot reveals; `ScrollTrigger.refresh()` after form-swap layout changes; reduced-motion canvas repaints after resize.
+## Historical direction retained in reference
 
-Verified at 1280×800 and <900px: zero console errors, exact trigger geometry (ledger fires at 72% viewport), pin spacers propagate (+2560px doc height), anchor nav lands 60px under the nav.
+The earlier v4 implementation used a black-and-neon couture/cybernetic visual
+system with a boot sequence, matrix-like canvas, simulated live ledger, pinned
+GSAP set pieces, and large illustrative corpus and replication figures. Its
+animation engineering was carefully debugged and remains preserved in
+`reference/URIM_v4_animated.html`.
 
-## Phase 1 — Production structure ✅ (done)
+That direction is no longer the production product surface. The change is
+strategic, not a repudiation of craft: the institutional buyer's trust threshold
+requires calmer presentation, explicit uncertainty, fewer unsupported signals,
+and a closer resemblance between the website and the intended decision brief.
 
-```
-index.html            # markup; proper <head> (lang, meta, OG, favicon, theme-color)
-assets/css/urim.css   # animation layer + base styles (extracted)
-assets/js/urim.js     # animation engine (extracted, bug-fixed) + form submission
-api/access.js         # POST /api/access — Neon insert, validation, consent required
-api/subscribe.js      # POST /api/subscribe — idempotent email insert
-```
+## Required before deployment
 
-- GSAP core / ScrollTrigger / ScrollToPlugin from cdnjs (page degrades gracefully without JS).
-- Fonts: Google Fonts with `display=swap` + preconnect.
+1. Apply `migrations/001_access_email.sql` to the production Neon database.
+2. Confirm the `access_requests` table and database retention policy.
+3. Add rate limiting or equivalent abuse control to the public endpoint.
+4. Configure an operational notification or review queue for new requests.
+5. Verify privacy and consent copy with qualified Quebec/Canadian counsel.
+6. Confirm trademark, entity, and public product-description language.
+7. Decide whether the deployment is an English research preview or a Quebec
+   commercial surface requiring full French parity.
+8. Add the approved canonical URL and convert social-image metadata to absolute
+   URLs once the production host is known. The branded 1200×630 card is already
+   present at `assets/og.png`.
+9. Run the validation suite and a proportionate accessibility/performance review.
 
-## Phase 2 — Pre-launch backlog (next passes)
+## Research next steps
 
-1. ~~**Form backend**~~ ✅ Neon Postgres via `@neondatabase/serverless`; tables `access_requests`, `subscribers`; `DATABASE_URL` in Vercel env (never committed). Remaining: spam protection (rate limit / honeypot), ops email notification on new requests.
-2. **Self-host fonts + GSAP** — Québec Law 25 / PIPEDA posture on the page argues against shipping visitor IPs to Google Fonts; bundle WOFF2 + vendored GSAP.
-3. **Social/OG image** — 1200×630 card; real canonical URL once the domain exists.
-4. **FR locale** — nav already stubs `FR (en préparation)`; plan `/fr/` mirror.
-5. **A11y audit** — focus states exist; add skip-link, verify contrast on `--t3`, keyboard-test forms.
-6. **Performance** — Lighthouse pass; subset the mono font; consider `content-visibility:auto` on below-fold sections.
-7. **Deploy** — static host (Vercel/Netlify); cache-immutable assets, HTML no-cache.
+### Gate 0 — Select the wedge
 
-## Decisions / conventions
+- Score candidate matter classes by data access, outcome observability, repeat
+  frequency, matter value, sales access, ethical fit, and validation feasibility.
+- Conduct structured interviews across partners, in-house disputes, claims, and
+  litigation finance.
+- Confirm the buyer/user split and the first budget owner.
 
-- Single-page, dependency-light, no build step — files in `site/` deploy as-is.
-- The two v4 HTML files stay as references; all future work happens in `site/`.
-- Breakpoints: pins ≥900px; nav links hide <1120px; lang switch hides <760px.
+### Gate 1 — Define the brief
+
+- Test the current specimen with 5–8 target professionals.
+- Observe which fields support an actual recommendation and which create noise.
+- Define abstention, missing-evidence, and human-review states.
+
+### Gate 2 — Validate the method
+
+- Publish outcome-label rules and the temporal validation protocol.
+- Build the first comparator-set pipeline using lawful, maintainable sources.
+- Report calibration, baselines, confidence intervals, exclusions, and failures.
+
+### Gate 3 — Assisted design partners
+
+- Move matter intake to an approved secure environment.
+- Produce counsel-reviewed, versioned briefs for bounded pilot matters.
+- Measure briefing use, decision comprehension, repeat demand, and analyst burden.
+
+### Gate 4 — Portfolio product
+
+- Add monitoring, matter comparison, team review, permissions, audit history,
+  retention controls, and portfolio-level calibration only after the assisted
+  brief shows repeated value.
+
+---
+
+Laboratoires Structure Inc. — Order, out of chaos.
