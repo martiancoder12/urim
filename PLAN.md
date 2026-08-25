@@ -59,9 +59,9 @@ and a closer resemblance between the website and the intended decision brief.
 6. Confirm trademark, entity, and public product-description language.
 7. Decide whether the deployment is an English research preview or a Quebec
    commercial surface requiring full French parity.
-8. Add the approved canonical URL and convert social-image metadata to absolute
-   URLs once the production host is known. The branded 1200×630 card is already
-   present at `assets/og.png`.
+8. Completed: set `https://urim.ca/` as the canonical URL and converted
+   social-image metadata to absolute URLs. The branded 1200×630 card is present
+   at `assets/og.png`.
 9. Run the validation suite and a proportionate accessibility/performance review.
 
 ## Research next steps

@@ -489,6 +489,9 @@ PLAN.md               implementation history
 The site has no front-end build step. The form API uses Vercel serverless
 functions and Neon Postgres via `DATABASE_URL`.
 
+The canonical production URL is `https://urim.ca/`. Vercel remains the
+application host, with the apex DNS managed through Cloudflare.
+
 ```sh
 npm install
 npm test
