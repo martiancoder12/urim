@@ -378,6 +378,14 @@ remove it.
 The website has one primary job: secure a qualified conversation with a
 portfolio decision-maker or senior matter owner.
 
+Until the mathematical engine has been implemented, bounded, and validated,
+the public website must frame URIM as **coming soon** and **under development**.
+All product interfaces and numerical outputs must remain explicitly
+illustrative. The site may explain the intended mathematical object and the
+standards it must satisfy, but it must not imply that a production model,
+validated estimate, live matter assessment, or generally available product
+already exists.
+
 The page should answer, in order:
 
 1. What decision does URIM improve?

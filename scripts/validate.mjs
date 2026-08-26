@@ -27,6 +27,10 @@ requireMatch('descriptive title', /<title>URIM — Decision intelligence for com
 requireMatch('briefing email field', /name="email"[^>]+required/i, html);
 requireMatch('confidentiality warning', /not submit confidential or privileged information/i, html);
 requireMatch('illustrative product label', /Illustrative product interface/i, html);
+requireMatch('coming-soon status', /Coming soon/i, html);
+requireMatch('under-development status', /under development/i, html);
+requireMatch('mathematical method section', /id="method"[\s\S]+p\(Y, Z, θ, M \| X, D\)/i, html);
+requireMatch('range-definition safeguard', /A range needs a definition/i, html);
 requireMatch('hero product workflow', /data-hero-tab="screen"/i, html);
 requireMatch('use-case workflow', /data-use-case-tab="screen"/i, html);
 requireMatch('FAQ workflow', /data-faq/i, html);

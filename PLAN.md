@@ -42,6 +42,9 @@ the reviewable decision brief.
    privileged matter information.
 8. **Refinement status:** this redesign is local and awaiting owner review before
    the next production deployment.
+9. **Launch status:** public copy must say “Coming soon” or “under development,”
+   and the mathematical method must be presented as intended architecture until
+   an implemented model has passed the stated validation gates.
 
 ## Historical direction retained in reference
 
