@@ -271,18 +271,25 @@ It should not:
 
 ## 9. Visual system
 
-The public site must look like the outside of the product: a decision brief, not
-a technology demo.
+The public site must present URIM as a credible enterprise legal-tech product
+whose interface leads naturally into a reviewable decision brief. The owner has
+selected the LexisNexis Protégé product page as a structural benchmark for the
+public-site rhythm: large product-led headlines, spacious white sections,
+selective colour, interface demonstrations, clear workflow navigation, and
+restrained enterprise polish. This is inspiration, not replication. URIM must
+use original copy, product interfaces, icons, assets, and interaction details;
+it must not reproduce LexisNexis trade dress or protected material.
 
 ### Colour roles
 
-- **Brief Paper:** warm, low-glare primary canvas
-- **Sheet White:** elevated document and control surfaces
-- **Carbon:** primary text
-- **Docket Blue:** institutional structure, primary actions, and data series
-- **Redline:** selective change, sensitivity, and critical-path emphasis
-- **Graphite:** secondary text
-- **Rule:** document dividers and table structure
+- **Canvas White:** dominant public-site canvas and clarity signal
+- **Soft Lavender / Ice:** product-demonstration and workflow surfaces
+- **Deep Navy:** primary text, navigation structure, evidence sections, and
+  institutional contrast
+- **Signal Red:** primary actions and the most consequential state changes
+- **Warm Orange:** controlled gradient support for conversion actions
+- **Graphite:** secondary text and supporting interface labels
+- **Rule:** quiet dividers, table structure, and card boundaries
 
 Neon green, CRT scanlines, terminal rain, chrome gradients, and default-black
 surfaces are retired. They imply hacker culture and opaque machinery when the
@@ -290,24 +297,27 @@ customer needs sobriety and reviewability.
 
 ### Typography
 
-- A sober editorial serif carries conclusions, section heads, and the URIM
-  wordmark.
-- A highly legible sans carries interface, explanatory prose, forms, and
-  navigation.
+- A strong, highly legible sans carries public-site headlines, interface,
+  explanatory prose, forms, navigation, and the URIM wordmark.
 - Monospace is reserved for matter IDs, versions, timestamps, and compact data.
 
-Typography should resemble a carefully typeset institutional brief without
-imitating court forms or legal-publisher trade dress.
+Typography should feel confident, contemporary, and enterprise-ready. The
+decision brief itself may retain denser editorial hierarchy, but the marketing
+surface should not resemble a court filing or traditional law-firm website.
 
 ### Layout
 
-- Use a 12-column editorial grid on wide screens and deliberate, independently
+- Use a wide enterprise grid on large screens and deliberate, independently
   composed mobile layouts.
-- Let the decision specimen dominate the first viewport.
-- Alternate compact analytical modules with quieter explanatory space.
-- Use rules, alignment, and typographic hierarchy before containers or cards.
-- Reserve boxed surfaces for documents, inputs, and decision controls that
-  actually require a boundary.
+- Lead with a split hero: a concise commercial proposition beside an original,
+  interactive URIM product demonstration.
+- Follow with a sticky product navigation bar, centered positioning copy,
+  large workflow showcases, use-case tabs, capability cards, governance, FAQ,
+  and conversion.
+- Alternate generous white space with pale product-demo surfaces and one dark
+  evidence section.
+- Keep interface specimens specific enough to explain URIM, while labeling all
+  unvalidated numerical examples as illustrative.
 
 ### Motion
 
@@ -315,7 +325,8 @@ Motion severity is low.
 
 - Functional feedback is immediate.
 - Initial entry may use one short composed sequence.
-- A critical-path specimen may animate only in response to user choice.
+- Product-preview states may advance slowly and must include a visible pause
+  control; direct user choice always takes priority.
 - Below-fold sections may settle by a few pixels once.
 - No boot screen, ambient canvas, marquee, magnetic button, scroll hijacking,
   pinned reading sequence, continuous glow, or decorative flicker.
@@ -477,7 +488,7 @@ The public site is a static, progressively enhanced single page:
 ```text
 index.html            page markup and product specimen
 assets/css/urim.css   design system, responsive layout, and restrained motion
-assets/js/urim.js     scenario interaction, navigation, and form submission
+assets/js/urim.js     product previews, tabs, carousel, FAQ, navigation, and form
 api/access.js         POST /api/access — briefing requests
 api/subscribe.js      retained legacy endpoint; not promoted in the current UI
 migrations/           database changes required by the briefing form

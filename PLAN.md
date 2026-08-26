@@ -1,18 +1,20 @@
 # URIM — Product and implementation log
 
-## Current state — 2026-08-25
+## Current state — 2026-08-26
 
-The public site has been rebuilt around the product strategy in `README.md`.
-The active direction targets institutional, repeat dispute decision-makers and
-presents URIM as a reviewable decision instrument rather than a prediction demo.
+The public site has been rebuilt around the product strategy in `README.md` and
+the owner's selected enterprise legal-tech visual benchmark. The active
+direction targets institutional, repeat dispute decision-makers and presents
+URIM through a product-led landing page whose workflow demonstrations lead into
+the reviewable decision brief.
 
 ### Production source
 
 | File | Role |
 |---|---|
 | `index.html` | Public product narrative, illustrative brief, qualification form |
-| `assets/css/urim.css` | Paper-and-ink design system and responsive layouts |
-| `assets/js/urim.js` | Scenario model, navigation, restrained reveals, form submission |
+| `assets/css/urim.css` | Enterprise legal-tech design system and responsive layouts |
+| `assets/js/urim.js` | Product previews, tabs, carousel, FAQ, navigation, and form submission |
 | `api/access.js` | Briefing-request endpoint |
 | `api/subscribe.js` | Legacy subscriber endpoint, retained but not promoted |
 | `migrations/001_access_email.sql` | Adds contact email to access requests |
@@ -29,12 +31,16 @@ presents URIM as a reviewable decision instrument rather than a prediction demo.
    critical path, sensitivities, sources, and versions.
 4. **Public proof rule:** no numerical performance or corpus claim until it is
    real, dated, reproducible, scoped, and linked to method.
-5. **Visual model:** 60% investment memorandum, 25% judicial reasons, 15%
-   analytical instrument.
-6. **Motion model:** one short entry, subtle below-fold settling, and
-   user-triggered state change only.
+5. **Visual model:** product-led enterprise presentation inspired structurally
+   by the LexisNexis Protégé page, expressed with original URIM copy, interfaces,
+   icons, colours, and assets. The underlying product remains 60% investment
+   memorandum, 25% judicial reasons, and 15% analytical instrument.
+6. **Motion model:** slow, pausable product-preview cycling, direct workflow
+   controls, subtle below-fold settling, and no decorative spectacle.
 7. **Privacy posture:** the public form explicitly rejects confidential or
    privileged matter information.
+8. **Refinement status:** this redesign is local and awaiting owner review before
+   the next production deployment.
 
 ## Historical direction retained in reference
 

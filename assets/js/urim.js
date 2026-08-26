@@ -10,7 +10,6 @@
   function setupHeader() {
     const header = $("[data-header]");
     if (!header) return;
-
     const update = () => header.classList.toggle("is-scrolled", window.scrollY > 12);
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -27,28 +26,22 @@
       document.body.classList.toggle("menu-open", open);
     };
 
-    toggle.addEventListener("click", () => {
-      setOpen(toggle.getAttribute("aria-expanded") !== "true");
-    });
-
+    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
     $$("a", nav).forEach((link) => link.addEventListener("click", () => setOpen(false)));
-
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
         setOpen(false);
         toggle.focus();
       }
     });
-
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 860) setOpen(false);
+      if (window.innerWidth > 920) setOpen(false);
     });
   }
 
   function setupReveals() {
     const items = $$("[data-reveal]");
     if (!items.length) return;
-
     if (reducedMotion.matches || !("IntersectionObserver" in window)) {
       items.forEach((item) => item.classList.add("is-visible"));
       return;
@@ -64,120 +57,136 @@
       },
       { rootMargin: "0px 0px -8%", threshold: 0.08 },
     );
-
     items.forEach((item) => observer.observe(item));
   }
 
-  const scenarios = {
-    base: {
-      outcome: 68,
-      low: 61,
-      high: 75,
-      swing: "Jurisdiction motion · ±14 pts",
-      event: "Motion decision",
-      summary: "Current record. The jurisdiction motion remains the largest unresolved swing factor.",
-      motionDetail: "Pending · ±14 point sensitivity",
-      motionStatus: "Open",
-      conclusion: "Claim path remains viable",
-      pathStatus: "Review",
-      change: "No event has been resolved. The displayed range remains conditional.",
-      state: "base",
-    },
-    granted: {
-      outcome: 79,
-      low: 72,
-      high: 84,
-      swing: "Expert evidence · ±9 pts",
-      event: "Expert admissibility ruling",
-      summary: "The motion survives. The lower jurisdiction risk raises the range and moves attention to expert evidence.",
-      motionDetail: "Survived · observed event",
-      motionStatus: "Observed",
-      conclusion: "Claim path strengthens",
-      pathStatus: "Strengthened",
-      change: "Jurisdiction risk resolves favourably. The next material dependency becomes expert admissibility.",
-      state: "granted",
-    },
-    denied: {
-      outcome: 31,
-      low: 23,
-      high: 41,
-      swing: "Forum and appeal posture · ±11 pts",
-      event: "Forum or appeal decision",
-      summary: "The motion fails. The current path breaks and the decision shifts toward forum, appeal, and settlement options.",
-      motionDetail: "Failed · path-breaking event",
-      motionStatus: "Adverse",
-      conclusion: "Current claim path breaks",
-      pathStatus: "Reassess",
-      change: "An adverse jurisdiction decision breaks the current sequence. Later events no longer support the same thesis.",
-      state: "denied",
-    },
-  };
+  function setupHeroDemo() {
+    const stage = $("[data-hero-stage]");
+    if (!stage) return;
 
-  function setupScenario() {
-    const root = $("[data-scenario]");
-    if (!root) return;
+    const keys = ["screen", "compare", "monitor", "review"];
+    const tabs = $$("[data-hero-tab]", stage);
+    const panels = $$("[data-hero-panel]", stage);
+    const motionToggle = $("[data-motion-toggle]", stage);
+    const motionLabel = $("[data-motion-label]", stage);
+    let activeIndex = 0;
+    let paused = reducedMotion.matches;
+    let timer = null;
 
-    const buttons = $$("[data-scenario-button]", root);
-    const steps = $$("[data-step]", root);
-
-    const apply = (key) => {
-      const data = scenarios[key];
-      if (!data) return;
-
-      buttons.forEach((button) => {
-        const active = button.dataset.scenarioButton === key;
-        button.classList.toggle("is-active", active);
-        button.setAttribute("aria-pressed", String(active));
+    const show = (key) => {
+      const nextIndex = keys.indexOf(key);
+      if (nextIndex < 0) return;
+      activeIndex = nextIndex;
+      tabs.forEach((tab) => {
+        const active = tab.dataset.heroTab === key;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", String(active));
       });
-
-      const setText = (selector, value, context = document) => {
-        const node = $(selector, context);
-        if (node) node.textContent = value;
-      };
-
-      setText("[data-scenario-outcome]", data.outcome, root);
-      setText("[data-scenario-copy]", data.summary, root);
-      setText("[data-motion-detail]", data.motionDetail, root);
-      setText("[data-motion-status]", data.motionStatus, root);
-      setText("[data-path-conclusion]", data.conclusion, root);
-      setText("[data-path-range]", `Reviewed range · ${data.low}–${data.high}%`, root);
-      setText("[data-path-status]", data.pathStatus, root);
-      setText("[data-change-note]", data.change, root);
-
-      setText("[data-outcome]", data.outcome);
-      setText("[data-range]", `${data.low}–${data.high}%`);
-      setText("[data-swing]", data.swing);
-      setText("[data-event]", data.event);
-
-      const band = $("[data-range-band]");
-      const point = $("[data-range-point]");
-      if (band) {
-        band.style.left = `${data.low}%`;
-        band.style.width = `${data.high - data.low}%`;
-      }
-      if (point) point.style.left = `${data.outcome}%`;
-
-      steps.forEach((step) => step.classList.remove("is-strengthened", "is-broken", "is-dimmed"));
-      const motion = $("[data-step='motion']", root);
-      const outcome = $("[data-step='outcome']", root);
-
-      if (data.state === "granted") {
-        motion?.classList.add("is-strengthened");
-        outcome?.classList.add("is-strengthened");
-      }
-
-      if (data.state === "denied") {
-        motion?.classList.add("is-broken");
-        $$("[data-step='expert'], [data-step='precedent']", root).forEach((step) => step.classList.add("is-dimmed"));
-        outcome?.classList.add("is-broken");
-      }
+      panels.forEach((panel) => {
+        const active = panel.dataset.heroPanel === key;
+        panel.hidden = !active;
+        panel.classList.toggle("is-active", active);
+      });
     };
 
-    buttons.forEach((button) => {
-      button.addEventListener("click", () => apply(button.dataset.scenarioButton));
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = null;
+    };
+    const start = () => {
+      stop();
+      if (paused || document.hidden) return;
+      timer = window.setInterval(() => show(keys[(activeIndex + 1) % keys.length]), 4600);
+    };
+    const updateMotionControl = () => {
+      if (!motionToggle || !motionLabel) return;
+      motionToggle.setAttribute("aria-pressed", String(paused));
+      motionToggle.setAttribute("aria-label", paused ? "Play product preview" : "Pause product preview");
+      motionLabel.textContent = paused ? "Play" : "Pause";
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        show(tab.dataset.heroTab);
+        start();
+      });
+    });
+    motionToggle?.addEventListener("click", () => {
+      paused = !paused;
+      updateMotionControl();
+      start();
+    });
+    document.addEventListener("visibilitychange", start);
+    reducedMotion.addEventListener?.("change", (event) => {
+      paused = event.matches;
+      updateMotionControl();
+      start();
     });
 
-    apply("base");
+    show(keys[0]);
+    updateMotionControl();
+    start();
+  }
+
+  function setupUseCases() {
+    const root = $("[data-use-cases]");
+    if (!root) return;
+    const tabs = $$("[data-use-case-tab]", root);
+    const panels = $$("[data-use-case-panel]", root);
+    const show = (key) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.useCaseTab === key;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", String(active));
+      });
+      panels.forEach((panel) => {
+        const active = panel.dataset.useCasePanel === key;
+        panel.hidden = !active;
+        panel.classList.toggle("is-active", active);
+      });
+    };
+    tabs.forEach((tab) => tab.addEventListener("click", () => show(tab.dataset.useCaseTab)));
+  }
+
+  function setupCarousel() {
+    const track = $("[data-carousel]");
+    const previous = $("[data-carousel-prev]");
+    const next = $("[data-carousel-next]");
+    if (!track || !previous || !next) return;
+
+    const distance = () => {
+      const card = $("article", track);
+      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 24;
+      return (card?.getBoundingClientRect().width || 380) + gap;
+    };
+    previous.addEventListener("click", () => track.scrollBy({ left: -distance(), behavior: reducedMotion.matches ? "auto" : "smooth" }));
+    next.addEventListener("click", () => track.scrollBy({ left: distance(), behavior: reducedMotion.matches ? "auto" : "smooth" }));
+  }
+
+  function setupFaq() {
+    const root = $("[data-faq]");
+    if (!root) return;
+    const buttons = $$("button[aria-expanded]", root);
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const opening = button.getAttribute("aria-expanded") !== "true";
+        buttons.forEach((candidate) => {
+          const answer = candidate.closest("article")?.querySelector(".faq-answer");
+          const symbol = $("span", candidate);
+          candidate.setAttribute("aria-expanded", "false");
+          if (answer) answer.hidden = true;
+          if (symbol) symbol.textContent = "+";
+        });
+        if (opening) {
+          const answer = button.closest("article")?.querySelector(".faq-answer");
+          button.setAttribute("aria-expanded", "true");
+          if (answer) answer.hidden = false;
+          const symbol = $("span", button);
+          if (symbol) symbol.textContent = "−";
+        }
+      });
+    });
   }
 
   function setupForm() {
@@ -185,13 +194,11 @@
     const success = $("#access-done");
     const status = $("#form-status");
     if (!form || !success || !status) return;
-
     const submit = $("button[type='submit']", form);
 
     const clearFieldState = () => {
       $$("[aria-invalid='true']", form).forEach((field) => field.removeAttribute("aria-invalid"));
     };
-
     const firstInvalidField = () => {
       const fields = $$("input, select, textarea", form);
       return fields.find((field) => !field.checkValidity());
@@ -206,7 +213,6 @@
       event.preventDefault();
       clearFieldState();
       status.textContent = "";
-
       const invalid = firstInvalidField();
       if (invalid) {
         invalid.setAttribute("aria-invalid", "true");
@@ -225,7 +231,6 @@
         matters: data.get("matters") || "",
         consent: data.get("consent") === "on",
       };
-
       const originalLabel = submit.textContent;
       submit.disabled = true;
       submit.textContent = "Sending…";
@@ -236,9 +241,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-
         if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-
         form.hidden = true;
         success.hidden = false;
         success.focus();
@@ -253,6 +256,9 @@
   setupHeader();
   setupMenu();
   setupReveals();
-  setupScenario();
+  setupHeroDemo();
+  setupUseCases();
+  setupCarousel();
+  setupFaq();
   setupForm();
 })();
