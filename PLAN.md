@@ -15,6 +15,7 @@ the reviewable decision brief.
 | `index.html` | Public product narrative, illustrative brief, qualification form |
 | `assets/css/urim.css` | Enterprise legal-tech design system and responsive layouts |
 | `assets/js/urim.js` | Product previews, tabs, carousel, FAQ, navigation, and form submission |
+| `assets/favicon.svg` | Production favicon derived from the URIM identity |
 | `api/access.js` | Briefing-request endpoint |
 | `api/subscribe.js` | Legacy subscriber endpoint, retained but not promoted |
 | `migrations/001_access_email.sql` | Adds contact email to access requests |

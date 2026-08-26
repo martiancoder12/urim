@@ -34,6 +34,7 @@ requireMatch('legal-advice disclaimer', /not legal advice/i, html);
 requireMatch('canonical production URL', /rel="canonical" href="https:\/\/urim\.ca\/"/i, html);
 requireMatch('Open Graph production URL', /property="og:url" content="https:\/\/urim\.ca\/"/i, html);
 requireMatch('Open Graph social image', /property="og:image" content="https:\/\/urim\.ca\/assets\/og\.png"/i, html);
+requireMatch('standalone SVG favicon', /rel="icon" type="image\/svg\+xml" href="assets\/favicon\.svg"/i, html);
 requireMatch('reduced motion styles', /prefers-reduced-motion:\s*reduce/i, css);
 requireMatch('responsive phone breakpoint', /@media\s*\(max-width:\s*560px\)/i, css);
 requireMatch('hero product interaction', /setupHeroDemo\(\)/, js);

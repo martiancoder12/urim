@@ -489,6 +489,7 @@ The public site is a static, progressively enhanced single page:
 index.html            page markup and product specimen
 assets/css/urim.css   design system, responsive layout, and restrained motion
 assets/js/urim.js     product previews, tabs, carousel, FAQ, navigation, and form
+assets/favicon.svg    compact URIM mark for browser and bookmark surfaces
 api/access.js         POST /api/access — briefing requests
 api/subscribe.js      retained legacy endpoint; not promoted in the current UI
 migrations/           database changes required by the briefing form
