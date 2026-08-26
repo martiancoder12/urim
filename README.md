@@ -30,6 +30,42 @@ URIM should not compete as another general legal-research chatbot. Its product
 is a reviewable decision brief: outcome range, assumptions, comparator set,
 critical path, sensitivities, dissent, provenance, and model version.
 
+URIM's mathematical object is not “a probability that a case wins.” Let `D`
+denote the historical comparison data, `X` the observed matter record,
+`Z = (Z₁, …, Zₖ)` the unresolved factual, procedural, and legal events, `Y` the
+possible terminal outcomes, `M` a candidate model, `θ` its uncertain
+parameters, and `A` the decision available to the user. The intended instrument
+models a joint predictive object such as `p(Y, Z, θ, M | X, D)`, then marginalizes
+over unresolved events, parameter uncertainty, and model uncertainty for the
+quantity relevant to the decision.
+
+If `Y` is binary, the posterior predictive probability `q = p(Y = 1 | X, D)` is
+a scalar. A displayed range around `q` is not justified by the word
+“uncertainty” alone. It must be defined as one of: a posterior credible interval
+for `q`; a frequentist confidence interval for an estimator of `q`; or a
+distribution of `q` across an explicitly defined and weighted scenario set.
+Those objects have different interpretations and must not be conflated. The
+Critical Path is the declared dependency structure among the components of
+`Z`; and a sensitivity is the change in the output when one stated event or
+assumption is varied while the rest of the scenario is held explicit.
+
+When the record changes, the distribution must be recomputed conditional on the
+new evidence. When strategies are compared, the relevant quantity is not only
+the probability of a favourable legal outcome, but the distribution of value,
+cost, time, and downside under each available action. A mathematically complete
+decision layer would therefore compare actions through a disclosed objective or
+utility function, for example `E[U(A, Y) | X]`, together with risk constraints
+that the user can inspect.
+
+This language is a specification standard, not permission to overclaim. Public
+materials must identify the actual variables, factorization or dependency
+model, estimation procedure, uncertainty interval, update rule, and validation
+method used in a released URIM system. A conditional scenario contrast must not
+be described as a causal effect unless the required causal assumptions are
+stated and defensible. If several models are combined, the combination rule and
+weights must be documented and tested out of sample; “the panel converges” is
+not a mathematical explanation.
+
 The simplest expression is:
 
 > A second opinion you can interrogate.
@@ -153,6 +189,8 @@ URIM must therefore reduce five anxieties:
 
 - A decision instrument for consequential disputes
 - A structured second opinion, not a replacement for counsel
+- A joint distribution over outcomes and the unresolved events on which they
+  depend, translated into a reviewable professional instrument
 - Calibrated ranges rather than categorical answers
 - Critical-path and sensitivity analysis rather than a single score
 - Transparent about evidence, assumptions, provenance, and version
